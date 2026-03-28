@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Comprehensive data dashboard for Pakistan's provinces and territories - population, economy, education, health, and development indicators from credible sources.">
+  <title>Deep Pak Data — Pakistan Provinces Dashboard</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇵🇰</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-content">
+      <a href="#" class="nav-brand">
+        <span class="nav-flag">🇵🇰</span>
+        <span class="nav-title">Deep<span>Pak</span>Data</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#provinces">Provinces</a></li>
+        <li><a href="#analytics">Analytics</a></li>
+        <li><a href="#compare">Compare</a></li>
+        <li><a href="#economy">Economy</a></li>
+        <li><a href="#sources">Sources</a></li>
+      </ul>
+      <button class="nav-mobile-toggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="overview">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="pulse"></span>
+        Data updated · Census 2023
+      </div>
+      <h1>
+        Explore <span class="highlight">Pakistan</span><br>
+        Province by Province
+      </h1>
+      <p class="hero-subtitle">
+        A comprehensive data platform presenting demographics, economy, education,
+        and development indicators across all provinces and territories — sourced from
+        PBS, World Bank, UNDP, and government publications.
+      </p>
+      <div class="hero-cta">
+        <a href="#provinces" class="btn btn-primary">Explore Provinces ↓</a>
+        <a href="#compare" class="btn btn-outline">Compare Data</a>
+      </div>
+      <div class="hero-stats" id="hero-stats"></div>
+    </div>
+  </section>
+
+  <!-- Key Indicators -->
+  <section class="section" id="indicators">
+    <div class="section-header">
+      <div class="section-tag">National Snapshot</div>
+      <h2 class="section-title">Key Indicators at a Glance</h2>
+      <p class="section-desc">Pakistan's vital statistics aggregated from official census data and economic surveys.</p>
+    </div>
+    <div class="indicators-grid" id="indicators-grid"></div>
+  </section>
+
+  <!-- Province Cards -->
+  <section class="section" id="provinces">
+    <div class="section-header">
+      <div class="section-tag">Provincial Profiles</div>
+      <h2 class="section-title">Provinces & Territories</h2>
+      <p class="section-desc">Click any card to view detailed statistics, development indicators, and regional insights.</p>
+    </div>
+    <div class="provinces-grid" id="provinces-grid"></div>
+  </section>
+
+  <!-- Analytics / Charts -->
+  <section class="section" id="analytics">
+    <div class="section-header">
+      <div class="section-tag">Visual Analytics</div>
+      <h2 class="section-title">Data Visualizations</h2>
+      <p class="section-desc">Interactive charts comparing key metrics across all provinces and territories.</p>
+    </div>
+    <div class="charts-grid">
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <h3>Population by Province</h3>
+          <div class="chart-icon" style="background:rgba(59,130,246,0.15)">👥</div>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="chart-population"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <h3>Literacy Rates (Male vs Female)</h3>
+          <div class="chart-icon" style="background:rgba(244,114,182,0.15)">📖</div>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="chart-literacy"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <h3>GDP Share Distribution</h3>
+          <div class="chart-icon" style="background:rgba(74,222,128,0.15)">💰</div>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="chart-gdp-share"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <h3>Human Development Index (HDI)</h3>
+          <div class="chart-icon" style="background:rgba(251,191,36,0.15)">🎯</div>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="chart-hdi"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Table -->
+  <section class="section" id="compare">
+    <div class="section-header">
+      <div class="section-tag">Data Comparison</div>
+      <h2 class="section-title">Province Comparison Table</h2>
+      <p class="section-desc">Sort by any column to compare. Click headers to toggle ascending/descending order.</p>
+    </div>
+    <div class="table-wrapper">
+      <div class="table-controls">
+        <h3>All Provinces & Territories</h3>
+        <input type="text" class="table-search" id="table-search" placeholder="Search provinces...">
+      </div>
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead id="table-head"></thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Economy Section -->
+  <section class="section" id="economy">
+    <div class="section-header">
+      <div class="section-tag">Economic Overview</div>
+      <h2 class="section-title">Pakistan's Economy</h2>
+      <p class="section-desc">GDP growth trends and economic sector composition from State Bank and Economic Survey data.</p>
+    </div>
+    <div class="economy-grid">
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <h3>GDP Growth Rate (Year-on-Year)</h3>
+          <div class="chart-icon" style="background:rgba(74,222,128,0.15)">📈</div>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="chart-gdp-growth"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <h3>Economic Sectors (% of GDP)</h3>
+          <div class="chart-icon" style="background:rgba(168,85,247,0.15)">🏭</div>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="chart-sectors"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Data Sources -->
+  <section class="sources-section" id="sources">
+    <div class="section" style="padding-bottom:3rem;">
+      <div class="section-header">
+        <div class="section-tag">Transparency & Credibility</div>
+        <h2 class="section-title">Data Sources</h2>
+        <p class="section-desc">All data is sourced from official government publications, international organizations, and peer-reviewed reports.</p>
+      </div>
+      <div class="sources-grid" id="sources-grid"></div>
+    </div>
+  </section>
+
+  <!-- Province Detail Modal -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal" id="modal-content"></div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer-text">
+      Deep Pak Data — Pakistan Provinces Dashboard &middot;
+      Data compiled from <a href="https://www.pbs.gov.pk" target="_blank">PBS</a>,
+      <a href="https://www.sbp.org.pk" target="_blank">SBP</a>,
+      <a href="https://www.undp.org/pakistan" target="_blank">UNDP</a>,
+      <a href="https://data.worldbank.org/country/pakistan" target="_blank">World Bank</a>
+      &middot; For educational & research purposes
+    </p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
